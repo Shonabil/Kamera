@@ -1,144 +1,312 @@
 <template>
-  <div class="min-h-screen bg-[#0a0a0a] text-white font-sans overflow-x-hidden">
+  <div class="min-h-screen bg-[#070707] flex flex-col items-center justify-start py-8 px-4 md:px-8 relative overflow-x-hidden font-sans">
     
-    <!-- Premium Background -->
-    <div class="fixed inset-0 z-0 pointer-events-none">
-      <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-gradient-to-br from-[#fc4c02]/15 via-[#ff6b2c]/10 to-transparent rounded-full blur-[120px] animate-pulse-slow"></div>
-      <div class="absolute bottom-[-15%] right-[-10%] w-[50vw] h-[50vw] bg-gradient-to-tl from-[#ff8c42]/10 to-transparent rounded-full blur-[100px] animate-pulse-slow-delayed"></div>
-      <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    <!-- Navigation Back Button -->
+    <div class="fixed top-6 left-6 z-50">
+      <NuxtLink to="/" class="group flex items-center gap-2 px-5 py-3 bg-white/10 hover:bg-[#fc4c02] backdrop-blur-xl rounded-full border border-white/10 hover:border-[#fc4c02] transition-all duration-300">
+        <svg class="w-5 h-5 text-white transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        <span class="text-white font-medium">Kembali ke Home</span>
+      </NuxtLink>
     </div>
 
-    <!-- Header -->
-    <nav class="relative z-50 w-full px-6 py-5 md:px-12 flex items-center justify-between bg-black/30 backdrop-blur-xl border-b border-white/5">
-      <div class="flex items-center gap-4">
-        <NuxtLink to="/" class="cursor-pointer group flex items-center gap-3">
-          <div class="relative">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#fc4c02] to-[#ff6b2c] flex items-center justify-center shadow-[0_10px_30px_-5px_rgba(252,76,2,0.5)] group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7.2 6.4c-.6-.5-1.5-.4-2 .2-.4.5-.4 1.2-.1 1.7l2.1 2.7-1 3.1.5.8c.6.4 1.5.3 2-.2l2.8-4.4c.3-.5.3-1.2-.1-1.6l-.4-.3c-.7-.5-1.5-.4-2 .2l-1.4 1.7 1.9 1.5 3.6-5.8-1.2-1.9-3.7 4.9-.2.3zM19.5 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
-            </div>
-            <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#fc4c02] to-[#ff6b2c] blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
-          </div>
-          <div class="flex items-baseline">
-            <span class="text-2xl font-black tracking-tight text-white">HiddenGem</span>
-            <span class="text-2xl font-black tracking-tight text-[#fc4c02]">Booth</span>
-          </div>
-        </NuxtLink>
-        
-        <!-- Back Button -->
-        <NuxtLink to="/" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-          Kembali
-        </NuxtLink>
-      </div>
-    </nav>
+    <!-- Premium Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-gray-950 to-black"></div>
+      <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#fc4c02]/5 rounded-full blur-[120px] animate-orb-1"></div>
+      <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-orange-500/5 rounded-full blur-[100px] animate-orb-2"></div>
+      <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    </div>
 
-    <!-- Main Content -->
-    <main class="relative z-10 py-16 px-4 max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <div class="z-10 w-full max-w-7xl text-center mt-12 mb-10 animate-fade-in-up">
+      <div class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#fc4c02]/10 border border-[#fc4c02]/25 mb-6">
+        <span class="text-3xl">🖼️</span>
+        <span class="text-xs font-bold text-[#fc4c02] uppercase tracking-widest">Galeri Publik</span>
+      </div>
       
-      <!-- Page Header -->
-      <div class="text-center mb-16">
-        <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
-          <div class="w-2 h-2 rounded-full bg-[#fc4c02] animate-ping"></div>
-          <span class="text-sm font-semibold text-white/80 uppercase tracking-wider">Gallery</span>
-        </div>
-        <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-4">
-          Koleksi <span class="bg-gradient-to-r from-[#fc4c02] to-[#ff6b2c] bg-clip-text text-transparent">Momen</span>
-        </h1>
-        <p class="text-gray-400 text-lg max-w-xl mx-auto">Setiap momen berharga yang telah diabadikan dalam sesi photo booth</p>
-      </div>
+      <h1 class="text-5xl md:text-7xl font-black text-white mb-4 tracking-tight">
+        Multi-Event <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#fc4c02] to-orange-500">Gallery</span>
+      </h1>
+      <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
+        Kumpulan momen keseruan dan senyuman berharga dari berbagai event MEDYA Photobooth!
+      </p>
+    </div>
 
-      <!-- Loading -->
-      <div v-if="pending" class="flex justify-center py-20">
-        <div class="w-16 h-16 border-4 border-white/10 border-t-[#fc4c02] rounded-full animate-spin"></div>
-      </div>
+    <!-- Loading State -->
+    <div v-if="pending" class="z-10 flex flex-col items-center justify-center min-h-[50vh]">
+      <div class="w-16 h-16 border-4 border-gray-800 border-t-[#fc4c02] rounded-full animate-spin mb-4"></div>
+      <p class="text-gray-500 text-sm">Memuat galeri foto...</p>
+    </div>
 
-      <!-- Empty State -->
-      <div v-else-if="!galleryData || galleryData.data.length === 0" class="text-center py-20">
-        <div class="w-28 h-28 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-8 border border-white/10">
-          <svg class="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-        </div>
-        <p class="text-2xl font-bold text-white mb-3">Belum Ada Momen</p>
-        <p class="text-gray-500 mb-10">Ayo abadikan momen pertamamu sekarang!</p>
-        <NuxtLink to="/session" class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#fc4c02] to-[#ff6b2c] hover:scale-105 text-white rounded-2xl font-bold transition-all duration-300 hover:shadow-[0_20px_50px_-10px_rgba(252,76,2,0.5)]">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-          Mulai Sesi Pertama
-        </NuxtLink>
+    <!-- Empty State -->
+    <div v-else-if="filteredSessions.length === 0" class="z-10 text-center max-w-md mx-auto py-20 animate-fade-in-up">
+      <div class="w-20 h-20 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+        <span class="text-3xl">📸</span>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">Belum Ada Foto</h3>
+      <p class="text-gray-500 text-sm mb-6">Belum ada strip foto publik atau diizinkan tayang untuk saat ini.</p>
+      <NuxtLink to="/session" class="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#fc4c02] to-orange-600 text-white rounded-xl font-bold transition-all hover:scale-105">
+        Mulai Foto Sekarang!
+      </NuxtLink>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div v-else class="z-10 w-full max-w-7xl">
+      
+      <!-- Filter Bar -->
+      <div class="mb-8 flex flex-wrap gap-3 justify-center items-center bg-white/5 border border-white/5 p-4 rounded-2xl backdrop-blur-md max-w-xl mx-auto animate-fade-in-up" style="animation-delay: 0.1s;">
+        <span class="text-xs text-gray-500 uppercase tracking-widest font-bold mr-2">Filter Event:</span>
+        <button 
+          @click="selectedEventFilter = 'ALL'"
+          class="px-4 py-2 rounded-xl text-xs font-bold transition-all border uppercase tracking-wider"
+          :class="selectedEventFilter === 'ALL' ? 'bg-[#fc4c02] border-[#fc4c02] text-white' : 'bg-white/5 border-transparent text-gray-300 hover:text-white'"
+        >
+          Semua Event
+        </button>
+        <button 
+          v-for="event in uniqueEvents" 
+          :key="event"
+          @click="selectedEventFilter = event"
+          class="px-4 py-2 rounded-xl text-xs font-bold transition-all border uppercase tracking-wider"
+          :class="selectedEventFilter === event ? 'bg-[#fc4c02] border-[#fc4c02] text-white' : 'bg-white/5 border-transparent text-gray-300 hover:text-white'"
+        >
+          {{ event }}
+        </button>
       </div>
 
       <!-- Gallery Grid -->
-      <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div v-for="(session, index) in galleryData.data" :key="session.id" 
-             class="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-[#fc4c02]/50 hover:bg-white/10 transition-all duration-500 animate-fade-in-up"
-             :style="{ animationDelay: `${index * 0.05}s` }"
-             @click="viewSession(session.id)">
-          <!-- Thumbnail -->
-          <div class="aspect-square bg-white/5 overflow-hidden">
-            <img v-if="getThumbnail(session)" :src="getThumbnail(session)" alt="Session" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-            <div v-else class="w-full h-full flex items-center justify-center">
-              <svg class="w-12 h-12 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+        
+        <div 
+          v-for="item in filteredSessions" 
+          :key="item.id"
+          @click="openShowcase(item)"
+          class="group relative bg-gradient-to-br from-gray-900/80 to-gray-900/40 border border-white/5 rounded-2xl overflow-hidden cursor-pointer hover:border-[#fc4c02]/40 transition-all duration-300 hover:shadow-xl hover:shadow-[#fc4c02]/20 hover:-translate-y-1"
+        >
+          <!-- Frame Wrapper -->
+          <div class="aspect-[1/3] p-4 flex items-center justify-center">
+            <img :src="item.urls.strip" alt="Photo Strip" class="max-h-full w-auto object-contain rounded-lg shadow-lg group-hover:scale-[1.03] transition-transform duration-500" />
           </div>
-          
-          <!-- Hover Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
-            <div class="text-white">
-              <p class="font-medium">{{ formatDate(session.completed_at) }}</p>
-              <p class="text-xs text-gray-400 capitalize">{{ session.mode }}</p>
-            </div>
+
+          <!-- Hover Overlay Details -->
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span class="text-[9px] font-bold text-[#fc4c02] uppercase tracking-wider block mb-0.5">
+              {{ item.meta?.eventName || 'MEDYA Photobooth' }}
+            </span>
+            <span class="text-white font-extrabold text-sm block truncate">
+              Sesi {{ item.session_code }}
+            </span>
+            <span class="text-gray-500 text-[10px] block mt-1">
+              {{ formatDate(item.completed_at) }}
+            </span>
           </div>
-          
-          <!-- Play Icon for Video -->
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-300">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+
+          <!-- Date badge on default view -->
+          <div class="absolute top-3 right-3 bg-[#070707]/60 backdrop-blur-md px-2 py-0.5 border border-white/10 rounded text-[9px] text-gray-400 font-mono group-hover:opacity-0 transition-opacity">
+            {{ formatDateShort(item.completed_at) }}
           </div>
         </div>
-      </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="relative z-10 py-10 px-6 border-t border-white/5 bg-black/50">
-      <div class="max-w-7xl mx-auto text-center">
-        <p class="text-gray-500 text-sm">
-          <span class="font-bold text-white">HiddenGem</span><span class="text-[#fc4c02]">Booth</span> © 2026
-        </p>
       </div>
-    </footer>
+
+    </div>
+
+    <!-- Teleport Modal: Premium Showcase and Downloads -->
+    <Teleport to="body">
+      <div v-if="showcase.show" class="fixed inset-0 z-[100] bg-[#070707]/95 backdrop-blur-md flex items-center justify-center p-4" @click.self="closeShowcase">
+        
+        <!-- Close Button -->
+        <button @click="closeShowcase" class="absolute top-5 right-5 w-12 h-12 bg-white/5 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all hover:rotate-90 hover:scale-110">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <!-- Showcase Panel -->
+        <div class="w-full max-w-4xl bg-neutral-900 border border-white/10 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row gap-6 shadow-2xl animate-fade-in max-h-[90vh] overflow-y-auto">
+          
+          <!-- Left Column: Big Strip Display -->
+          <div class="flex-1 flex items-center justify-center bg-[#070707]/40 p-4 rounded-2xl border border-white/5 h-[65vh]">
+            <img :src="showcase.item.urls.strip" alt="Photo Strip" class="max-h-full w-auto object-contain rounded-xl shadow-2xl" />
+          </div>
+
+          <!-- Right Column: Interactive details -->
+          <div class="w-full md:w-80 flex flex-col justify-between py-2 text-left">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#fc4c02]/10 border border-[#fc4c02]/25 rounded-full mb-4">
+                <span class="w-2 h-2 bg-[#fc4c02] rounded-full animate-ping"></span>
+                <span class="text-[9px] font-bold text-[#fc4c02] uppercase tracking-wider">Momen Terpilih</span>
+              </div>
+              
+              <h3 class="text-2xl font-black text-white mb-1">
+                Event {{ showcase.item.meta?.eventName || 'MEDYA Booth' }}
+              </h3>
+              <p class="text-xs text-gray-500 font-mono">Session Code: {{ showcase.item.session_code }}</p>
+              
+              <div class="w-full h-px bg-white/5 my-4"></div>
+
+              <div class="space-y-4">
+                <!-- Timestamp details -->
+                <div>
+                  <span class="text-[10px] text-gray-500 uppercase tracking-widest block">Tanggal Cetak</span>
+                  <span class="text-white text-sm font-bold">{{ formatDate(showcase.item.completed_at) }}</span>
+                </div>
+                
+                <!-- Applied Filter -->
+                <div v-if="showcase.item.meta?.activeFilter">
+                  <span class="text-[10px] text-gray-500 uppercase tracking-widest block">Filter Efek</span>
+                  <span class="text-[#fc4c02] text-sm font-bold uppercase tracking-wider">
+                    ✨ {{ showcase.item.meta.activeFilter }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Download Button in showcase -->
+            <div class="mt-8 space-y-3">
+              <a 
+                :href="showcase.item.urls.strip" 
+                download 
+                class="w-full py-3.5 bg-gradient-to-r from-[#fc4c02] to-orange-600 text-white font-bold rounded-xl text-sm hover:scale-105 transition-all shadow-lg shadow-[#fc4c02]/20 flex items-center justify-center gap-2"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Unduh Strip Foto</span>
+              </a>
+              <NuxtLink 
+                :to="`/result/${showcase.item.id}`" 
+                class="w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-1.5"
+              >
+                <span>Lihat Halaman Sesi Lengkap</span>
+                <span>➡️</span>
+              </NuxtLink>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </Teleport>
+
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { useAsyncData } from '#imports'
 
-const router = useRouter()
 const API_URL = 'http://photobooth.test/api'
+const selectedEventFilter = ref('ALL')
 
-const { data: galleryData, pending } = await useFetch(`${API_URL}/sessions`)
+// Showcase modal reactive
+const showcase = ref({ show: false, item: null })
 
-function viewSession(id) {
-  router.push(`/result/${id}`)
-}
+const { data: responseData, pending, error } = await useAsyncData('gallery-sessions', () => {
+  return $fetch(`${API_URL}/sessions`)
+})
 
-function getThumbnail(session) {
-  if (!session.final_file) return null
-  try {
-    const urls = JSON.parse(session.final_file)
-    return urls.strip || urls.gif || urls.video
-  } catch {
-    return session.final_file
-  }
-}
+// Parsed and clean session lists
+const sessions = computed(() => {
+  if (!responseData.value || !responseData.value.data) return []
+  
+  return responseData.value.data.map(session => {
+    let urls = { strip: '', gif: '', video: '' }
+    if (session.final_file) {
+      try {
+        urls = JSON.parse(session.final_file)
+      } catch (e) {
+        urls = { strip: session.final_file, gif: session.final_file, video: session.final_file }
+      }
+    }
 
+    let meta = { eventName: 'MEDYA Photobooth', consent: true, activeFilter: 'original' }
+    if (session.metadata) {
+      try {
+        meta = JSON.parse(session.metadata)
+      } catch (e) {
+        meta = { eventName: 'MEDYA Photobooth', consent: true, activeFilter: 'original' }
+      }
+    }
+
+    return {
+      ...session,
+      urls,
+      meta
+    }
+  }).filter(session => {
+    // Only display completed sessions with valid files and publication consent
+    return session.status === 'completed' && session.urls.strip && (session.meta.consent !== false)
+  })
+})
+
+// Dynamic Event list grouping
+const uniqueEvents = computed(() => {
+  const list = new Set()
+  sessions.value.forEach(s => {
+    if (s.meta?.eventName) {
+      list.add(s.meta.eventName.toUpperCase().trim())
+    }
+  })
+  return Array.from(list)
+})
+
+// Filtered grid display
+const filteredSessions = computed(() => {
+  if (selectedEventFilter.value === 'ALL') return sessions.value
+  
+  return sessions.value.filter(s => {
+    return s.meta?.eventName?.toUpperCase().trim() === selectedEventFilter.value
+  })
+})
+
+// Date formating helpers
 function formatDate(dateString) {
   if (!dateString) return ''
   const date = new Date(dateString)
-  return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+  return date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+function formatDateShort(dateString) {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  return date.toLocaleDateString('id-ID', {
+    day: '2-digit',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+// Showcase modal methods
+function openShowcase(item) {
+  showcase.value = { show: true, item }
+}
+
+function closeShowcase() {
+  showcase.value = { show: false, item: null }
 }
 </script>
 
-<style>
-@keyframes pulse-slow {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
+<style scoped>
+@keyframes orb-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate(30px, -30px) scale(1.1); opacity: 0.7; }
+}
+
+@keyframes orb-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  50% { transform: translate(-20px, 20px) scale(1.05); opacity: 0.6; }
+}
+
+.animate-orb-1 {
+  animation: orb-1 12s ease-in-out infinite;
+}
+
+.animate-orb-2 {
+  animation: orb-2 10s ease-in-out infinite;
+  animation-delay: -3s;
 }
 
 @keyframes fadeInUp {
@@ -146,17 +314,17 @@ function formatDate(dateString) {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 8s ease-in-out infinite;
-}
-
-.animate-pulse-slow-delayed {
-  animation: pulse-slow 10s ease-in-out infinite;
-  animation-delay: -3s;
-}
-
 .animate-fade-in-up {
   opacity: 0;
-  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
 }
 </style>

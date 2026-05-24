@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-black flex flex-col items-center justify-start py-8 px-4 relative overflow-x-hidden font-sans">
+  <div class="min-h-screen bg-[#070707] flex flex-col items-center justify-start py-8 px-4 relative overflow-x-hidden font-sans">
     
     <!-- Premium Background -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -14,7 +14,7 @@
       <div class="relative mb-8">
         <div class="w-20 h-20 border-4 border-gray-800 rounded-full"></div>
         <div class="absolute top-0 left-0 w-20 h-20 border-4 border-transparent border-t-[#fc4c02] rounded-full animate-spin-fast"></div>
-        <div class="absolute inset-2 rounded-full bg-black flex items-center justify-center">
+        <div class="absolute inset-2 rounded-full bg-[#070707] flex items-center justify-center">
           <div class="w-12 h-12 bg-gradient-to-br from-[#fc4c02] to-orange-600 rounded-full flex items-center justify-center">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           </div>
@@ -42,13 +42,13 @@
       <div class="text-center mb-10 animate-fade-in-up">
         <div class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#fc4c02]/20 to-orange-600/20 border border-[#fc4c02]/30 mb-8">
           <svg class="w-4 h-4 text-[#fc4c02]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          <span class="text-sm font-semibold text-[#fc4c02] uppercase tracking-widest">Download Center</span>
+          <span class="text-sm font-semibold text-[#fc4c02] uppercase tracking-widest">{{ eventName }} • Download Center</span>
         </div>
         
         <h1 class="text-5xl md:text-6xl font-black text-white mb-4">
           Pilih <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#fc4c02] to-orange-500">File</span>
         </h1>
-        <p class="text-gray-400 text-lg">Pilih file yang ingin kamu download</p>
+        <p class="text-gray-400 text-lg">Pilih file yang ingin kamu download secara gratis</p>
       </div>
 
       <!-- File Options - Premium Cards -->
@@ -56,7 +56,7 @@
         
         <!-- Video -->
         <div class="group animate-fade-in-up" style="animation-delay: 0.1s;">
-          <button @click="downloadFile(parsedUrls.video, 'photobooth-video.mp4')" class="w-full flex items-center gap-5 p-6 bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-xl rounded-2xl border border-gray-800/50 hover:border-[#fc4c02]/50 hover:bg-gray-800/60 transition-all duration-500 text-left group-hover:scale-[1.02]">
+          <button @click="downloadFile(parsedUrls.video, 'photobooth-video.mp4')" class="w-full flex items-center gap-5 p-6 bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-xl rounded-2xl border border-gray-800/50 hover:border-[#fc4c02] hover:bg-gray-800/60 transition-all duration-500 text-left group-hover:scale-[1.02]">
             <div class="w-16 h-16 bg-gradient-to-br from-[#fc4c02]/20 to-orange-600/20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
               <svg class="w-8 h-8 text-[#fc4c02]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </div>
@@ -72,7 +72,7 @@
 
         <!-- GIF -->
         <div class="group animate-fade-in-up" style="animation-delay: 0.2s;">
-          <button @click="downloadFile(parsedUrls.gif, 'photobooth-gif.gif')" class="w-full flex items-center gap-5 p-6 bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-xl rounded-2xl border border-gray-800/50 hover:border-[#fc4c02]/50 hover:bg-gray-800/60 transition-all duration-500 text-left group-hover:scale-[1.02]">
+          <button @click="downloadFile(parsedUrls.gif, 'photobooth-gif.gif')" class="w-full flex items-center gap-5 p-6 bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-xl rounded-2xl border border-gray-800/50 hover:border-[#fc4c02] hover:bg-gray-800/60 transition-all duration-500 text-left group-hover:scale-[1.02]">
             <div class="w-16 h-16 bg-gradient-to-br from-[#fc4c02]/20 to-orange-600/20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
               <svg class="w-8 h-8 text-[#fc4c02]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
             </div>
@@ -88,7 +88,7 @@
 
         <!-- Photo Strip -->
         <div class="group animate-fade-in-up" style="animation-delay: 0.3s;">
-          <button @click="downloadFile(parsedUrls.strip, 'photobooth-strip.jpg')" class="w-full flex items-center gap-5 p-6 bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-xl rounded-2xl border border-gray-800/50 hover:border-[#fc4c02]/50 hover:bg-gray-800/60 transition-all duration-500 text-left group-hover:scale-[1.02]">
+          <button @click="downloadFile(parsedUrls.strip, 'photobooth-strip.jpg')" class="w-full flex items-center gap-5 p-6 bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-xl rounded-2xl border border-gray-800/50 hover:border-[#fc4c02] hover:bg-gray-800/60 transition-all duration-500 text-left group-hover:scale-[1.02]">
             <div class="w-16 h-16 bg-gradient-to-br from-[#fc4c02]/20 to-orange-600/20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
               <svg class="w-8 h-8 text-[#fc4c02]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
             </div>
@@ -115,8 +115,17 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'nuxt/app'
+
+const eventName = ref('MEDYA Photobooth')
+
+onMounted(() => {
+  if (process.client) {
+    const savedEvent = localStorage.getItem('booth_event_name')
+    if (savedEvent) eventName.value = savedEvent
+  }
+})
 
 const route = useRoute()
 const sessionId = route.params.id

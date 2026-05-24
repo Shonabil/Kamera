@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Photobooth Remote QR (LAN)</title>
+        <style>
+            body {
+                font-family:
+                    Segoe UI,
+                    Roboto,
+                    Arial;
+                background: #111;
+                color: #eee;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 32px;
+            }
+            .card {
+                background: #1b1b1b;
+                border: 1px solid #222;
+                padding: 18px;
+                border-radius: 8px;
+                width: 360px;
+                text-align: center;
+            }
+            img {
+                width: 300px;
+                height: 300px;
+            }
+            a {
+                color: #4fc3f7;
+            }
+            small {
+                color: #999;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Photobooth Remote QR (LAN)</h2>
+        <div class="card">
+            <p>
+                <strong
+                    >Use this if your phone is on the same Wi‑Fi as the dev
+                    machine.</strong
+                >
+            </p>
+            <p>IP of dev machine detected: <code>192.168.1.15</code></p>
+
+            <p><small>Variant A — no port (try this first)</small></p>
+            <img
+                alt="QR without port"
+                src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2F192.168.1.15%2Fremote-control%3Fsession%3Dactive"
+            />
+            <p>
+                <a href="http://192.168.1.15/remote-control?session=active"
+                    >http://192.168.1.15/remote-control?session=active</a
+                >
+            </p>
+
+            <hr style="opacity: 0.06" />
+
+            <p><small>Variant B — with dev port 3000</small></p>
+            <img
+                alt="QR with port 3000"
+                src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2F192.168.1.15%3A3000%2Fremote-control%3Fsession%3Dactive"
+            />
+            <p>
+                <a href="http://192.168.1.15:3000/remote-control?session=active"
+                    >http://192.168.1.15:3000/remote-control?session=active</a
+                >
+            </p>
+
+            <hr style="opacity: 0.06" />
+            <p style="font-size: 13px; color: #bbb">
+                If neither works, run <code>ngrok http &lt;port&gt;</code> on
+                the dev machine and use the forwarded URL instead.
+            </p>
+        </div>
+    </body>
+</html>

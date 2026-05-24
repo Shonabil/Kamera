@@ -16,6 +16,7 @@ class Session extends Model
         'status',
         'final_file',
         'qr_code',
+        'metadata',
         'started_at',
         'completed_at'
     ];

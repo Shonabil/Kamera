@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\CameraController;
 
 Route::get('/user', function (Request $request) {

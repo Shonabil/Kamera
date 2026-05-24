@@ -30,7 +30,8 @@ class SessionController extends Controller
     {
         $request->validate([
             'mode' => 'required|in:photo,video,gif',
-            'template_id' => 'nullable|exists:templates,id'
+            'template_id' => 'nullable|exists:templates,id',
+            'metadata' => 'nullable|string'
         ]);
 
         $sessionCode = strtoupper(Str::random(8));
@@ -40,6 +41,7 @@ class SessionController extends Controller
             'mode' => $request->mode,
             'template_id' => $request->template_id,
             'status' => 'pending',
+            'metadata' => $request->metadata,
             'started_at' => now(),
         ]);
 

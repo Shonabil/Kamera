@@ -1,136 +1,386 @@
 <template>
-  <div class="min-h-screen bg-[#0a0a0a] text-white font-sans overflow-x-hidden">
+  <div class="min-h-screen h-screen max-h-screen overflow-hidden flex flex-col justify-between p-4 md:p-6 select-none bg-[#f8f9fa] text-black font-sans relative">
     
-    <!-- Premium Animated Background -->
-    <div class="fixed inset-0 z-0 pointer-events-none">
-      <div class="absolute top-[-30%] left-[-15%] w-[80vw] h-[80vw] bg-gradient-to-br from-[#ff6b2c]/20 via-[#fc4c02]/15 to-transparent rounded-full blur-[150px] animate-pulse-slow"></div>
-      <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-gradient-to-tl from-[#ff8c42]/15 to-transparent rounded-full blur-[120px] animate-pulse-slow-delayed"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-radial from-[#fc4c02]/5 to-transparent rounded-full blur-[200px]"></div>
-      
-      <!-- Grid Pattern -->
-      <div class="absolute inset-0 opacity-[0.03]" 
-           style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;">
-      </div>
+    <!-- High-Octane Creative Studio Dot Grid Backdrop -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#f8f9fa]">
+      <div class="absolute inset-0 opacity-[0.08]" style="background-image: radial-gradient(#000 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="relative z-50 w-full px-6 py-5 md:px-12 flex items-center justify-between bg-black/30 backdrop-blur-xl border-b border-white/5">
-      <div class="cursor-pointer group flex items-center gap-4" @click="scrollToTop">
+    <!-- Premium Navigation Bar -->
+    <nav class="relative z-50 w-full px-6 py-4 md:px-12 flex items-center justify-between bg-white border-4 border-black shadow-[4px_4px_0px_#000]">
+      <div class="cursor-pointer group flex items-center gap-3" @click="scrollToTop">
         <div class="relative">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#fc4c02] to-[#ff6b2c] flex items-center justify-center shadow-[0_10px_30px_-5px_rgba(252,76,2,0.5)] group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7.2 6.4c-.6-.5-1.5-.4-2 .2-.4.5-.4 1.2-.1 1.7l2.1 2.7-1 3.1.5.8c.6.4 1.5.3 2-.2l2.8-4.4c.3-.5.3-1.2-.1-1.6l-.4-.3c-.7-.5-1.5-.4-2 .2l-1.4 1.7 1.9 1.5 3.6-5.8-1.2-1.9-3.7 4.9-.2.3zM19.5 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+          <div class="w-10 h-8 bg-[#fc4c02] border-2 border-black flex items-center justify-center shadow-[2px_2px_0px_#d8ff00] group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] group-hover:shadow-[3px_3px_0px_#d8ff00] transition-all transform -skew-x-12">
+            <i class="fa-solid fa-camera text-black text-sm transform skew-x-12"></i>
           </div>
-          <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#fc4c02] to-[#ff6b2c] blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
         </div>
-        <div class="flex items-baseline">
-          <span class="text-2xl font-black tracking-tight text-white">HiddenGem</span>
-          <span class="text-2xl font-black tracking-tight text-[#fc4c02]">Booth</span>
+        <div class="flex flex-col text-left">
+          <span class="text-xl font-black tracking-tighter text-black leading-none uppercase italic">HiddenGem</span>
+          <span class="text-[8px] font-black uppercase tracking-[0.25em] text-[#fc4c02] mt-0.5 leading-none">Creative Studio</span>
         </div>
+      </div>
+
+      <div class="flex items-center gap-3 relative z-50">
+        <NuxtLink to="/gallery" class="px-4 py-2 text-xs font-black bg-[#ff007f] text-black border-2 border-black shadow-[2px_2px_0px_#00f0ff] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#00f0ff] transition-all flex items-center gap-2 tracking-widest uppercase">
+          <i class="fa-solid fa-images"></i> <span>VIEW GALLERY</span>
+        </NuxtLink>
+        <button @click="openPasscodeModal" class="p-2 bg-white border-2 border-black text-[#fc4c02] shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] transition-all" title="Operator Settings">
+          <i class="fa-solid fa-cogs text-base"></i>
+        </button>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <main class="relative z-10 flex flex-col items-center justify-center min-h-[85vh] text-center px-4 max-w-5xl mx-auto">
-      
-      <!-- Hero Badge -->
-      <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-10 animate-fade-in-up">
-        <div class="w-2 h-2 rounded-full bg-[#fc4c02] animate-ping"></div>
-        <span class="text-sm font-semibold text-white/80 tracking-wider uppercase">Premium Experience</span>
+    <!-- Passcode Drawer Modal -->
+    <Teleport to="body">
+      <div v-if="showPasscodeModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="w-full max-w-sm bg-white border-4 border-black p-6 shadow-[8px_8px_0px_#d8ff00] relative">
+          <button @click="showPasscodeModal = false" class="absolute top-4 right-4 text-gray-500 hover:text-black bg-neutral-100 p-1.5 rounded-full border border-black">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          
+          <div class="text-center mb-5">
+            <div class="w-12 h-12 bg-[#fc4c02] border-2 border-black text-black flex items-center justify-center mx-auto mb-3 shadow-[2px_2px_0px_#000]">
+              <i class="fa-solid fa-lock text-xl"></i>
+            </div>
+            <h3 class="text-lg font-black text-black uppercase tracking-wider italic font-sans leading-none">Operator Passcode</h3>
+            <p class="text-gray-600 text-xs mt-1">Masukkan kode otorisasi 4 digit</p>
+          </div>
+
+          <form @submit.prevent="submitPasscode">
+            <input 
+              v-model="passcodeInput" 
+              type="password" 
+              placeholder="••••" 
+              maxlength="4" 
+              class="w-full bg-neutral-50 border-4 border-black py-2.5 px-4 text-center text-2xl font-mono tracking-widest text-black mb-4 focus:border-[#fc4c02] focus:outline-none"
+              autofocus
+            />
+            <p v-if="passcodeError" class="text-red-600 text-sm text-center mb-4 uppercase tracking-wider font-black">Passcode tidak valid!</p>
+            <button type="submit" class="w-full py-3.5 bg-[#fc4c02] text-black border-2 border-black font-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+              <span>Masuk Settings</span> <i class="fa-solid fa-key"></i>
+            </button>
+          </form>
+        </div>
       </div>
+    </Teleport>
+
+    <!-- Admin Settings Drawer Modal -->
+    <Teleport to="body">
+      <div v-if="showAdminModal" class="fixed inset-0 z-[100] flex items-center justify-end bg-black/70 backdrop-blur-sm">
+        <div class="w-full max-w-lg h-full bg-[#f8f9fa] border-l-4 border-black p-6 flex flex-col justify-between overflow-y-auto shadow-2xl animate-slide-in">
+          <div>
+            <div class="flex items-center justify-between border-b-4 border-black pb-3 mb-5">
+              <div class="flex items-center gap-3 text-left">
+                <i class="fa-solid fa-sliders text-xl text-[#fc4c02]"></i>
+                <div>
+                  <h2 class="text-lg font-black text-black uppercase tracking-wider italic leading-none">HiddenGem Console</h2>
+                  <p class="text-gray-600 text-[10px] mt-0.5">Ubah parameter operasional mesin booth</p>
+                </div>
+              </div>
+              <button @click="showAdminModal = false" class="text-gray-500 hover:text-black bg-neutral-200 p-1.5 border border-black shadow-[1px_1px_0px_#000]">
+                <i class="fa-solid fa-xmark text-base"></i>
+              </button>
+            </div>
+
+            <!-- Form parameters -->
+            <div class="space-y-4 text-left">
+              <div>
+                <label class="block text-[10px] font-black uppercase tracking-wider text-orange-600 mb-1">Nama Event / Lokasi</label>
+                <input v-model="settings.eventName" type="text" class="w-full bg-white border-2 border-black py-2 px-3 text-black text-xs focus:border-[#fc4c02] focus:outline-none" />
+              </div>
+              
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[10px] font-black uppercase tracking-wider text-orange-600 mb-1">Tarif Sesi (IDR)</label>
+                  <input v-model.number="settings.activePrice" type="number" class="w-full bg-white border-2 border-black py-2 px-3 text-black text-xs focus:border-[#fc4c02] focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-black uppercase tracking-wider text-orange-600 mb-1">DCC Server Port</label>
+                  <input v-model="settings.dccPort" type="text" placeholder="5513" class="w-full bg-white border-2 border-black py-2 px-3 text-black text-xs focus:border-[#fc4c02] focus:outline-none" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-black uppercase tracking-wider text-orange-600 mb-1">Kode Tiket Bypass (Koma)</label>
+                <input v-model="settings.ticketString" type="text" placeholder="TKT01,TKT02" class="w-full bg-white border-2 border-black py-2 px-3 text-black text-xs focus:border-[#fc4c02] focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-black uppercase tracking-wider text-orange-600 mb-1">Kode Promo Voucher (Koma)</label>
+                <input v-model="settings.voucherString" type="text" placeholder="VCHR20,PROMO" class="w-full bg-white border-2 border-black py-2 px-3 text-black text-xs focus:border-[#fc4c02] focus:outline-none" />
+              </div>
+
+              <div class="border-t-2 border-black pt-3">
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <label class="block text-xs font-black text-black uppercase italic leading-none">Promo Pop-Up Banner</label>
+                    <p class="text-gray-500 text-[9px] mt-0.5">Tampilkan splash promosi saat load beranda</p>
+                  </div>
+                  <input v-model="settings.enablePromo" type="checkbox" class="w-4 h-4 rounded accent-orange-600 bg-white border-2 border-black" />
+                </div>
+                <div v-if="settings.enablePromo">
+                  <label class="block text-[10px] font-black uppercase tracking-wider text-orange-600 mb-1">Pesan Promo Banner</label>
+                  <textarea v-model="settings.promoText" rows="2" class="w-full bg-white border-2 border-black py-2 px-3 text-black text-xs focus:border-[#fc4c02] focus:outline-none"></textarea>
+                </div>
+              </div>
+
+              <div class="border-t-2 border-black pt-3">
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <label class="block text-xs font-black text-black uppercase italic leading-none">QR Payment</label>
+                    <p class="text-gray-500 text-[9px] mt-0.5">Aktifkan pembayaran via QR code</p>
+                  </div>
+                  <input v-model="settings.enablePaymentQR" type="checkbox" class="w-4 h-4 rounded accent-orange-600 bg-white border-2 border-black" />
+                </div>
+                <div v-if="settings.enablePaymentQR">
+                  <label class="block text-[10px] font-black uppercase tracking-wider text-orange-600 mb-1">URL Gambar QR Payment</label>
+                  <input v-model="settings.paymentQRUrl" type="text" placeholder="https://contoh.com/qr-payment.png" class="w-full bg-white border-2 border-black py-2 px-3 text-black text-xs focus:border-[#fc4c02] focus:outline-none" />
+                  <p class="text-[9px] text-gray-500 mt-1">Masukkan link gambar QR payment (QRIS, DANA, dll)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex gap-3 border-t-4 border-black pt-3">
+            <button @click="showAdminModal = false" class="flex-1 py-2.5 bg-neutral-200 border-2 border-black text-black font-black hover:bg-neutral-300 transition-colors uppercase tracking-widest text-[10px]">
+              Batal
+            </button>
+            <button @click="saveSettings" class="flex-1 py-2.5 bg-[#fc4c02] text-black font-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] transition-all uppercase tracking-widest text-[10px] flex items-center justify-center gap-1.5">
+              <span>Simpan</span> <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </Teleport>
+
+    <!-- Asymmetrical Split-Screen Hero Main Section -->
+    <main class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex-1 grid grid-cols-12 gap-8 items-center min-h-0 overflow-hidden my-4">
       
-      <!-- Main Title -->
-      <h1 class="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[1.1] animate-fade-in-up" style="animation-delay: 0.1s;">
-        Abadikan <br/>
-        <span class="relative">
-          <span class="bg-gradient-to-r from-[#fc4c02] via-[#ff6b2c] to-[#fc4c02] bg-clip-text text-transparent">Momen Berharga</span>
-          <svg class="absolute -bottom-2 left-0 w-full h-3 text-[#fc4c02] opacity-30" viewBox="0 0 200 12" preserveAspectRatio="none">
-            <path d="M0 8 Q 50 12, 100 8 T 200 8 L 200 12 L 0 12 Z" fill="currentColor"/>
-          </svg>
-        </span>
-      </h1>
-      
-      <!-- Subtitle -->
-      <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 font-light leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
-        Satu kali klik, Dapatkan segalanya. Photo strip estetik, 
-        animasi GIF unik, dan video keseruanmu — semua dalam satu sesi!
-      </p>
-      
-      <!-- CTA Buttons -->
-      <div class="animate-fade-in-up flex flex-col sm:flex-row gap-5" style="animation-delay: 0.3s;">
-        <!-- Start Session Button -->
-        <NuxtLink to="/session" class="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-500 bg-gradient-to-r from-[#fc4c02] to-[#ff6b2c] rounded-2xl overflow-hidden hover:scale-105 hover:shadow-[0_20px_60px_-10px_rgba(252,76,2,0.6)] focus:outline-none focus:ring-2 focus:ring-[#fc4c02] focus:ring-offset-2 focus:ring-offset-black">
-          <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          <span class="relative z-10 flex items-center text-lg">
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            Mulai Sesi
-            <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-          </span>
-        </NuxtLink>
+      <!-- LEFT COLUMN: Creative Telemetry Panel (60% width) -->
+      <div class="col-span-7 text-left flex flex-col justify-center h-full min-h-0 overflow-hidden animate-fade-in-up">
         
-        <!-- Gallery Button -->
-        <NuxtLink to="/gallery" class="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-500 bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/20 hover:shadow-[0_10px_40px_-10px_rgba(255,255,255,0.1)] focus:outline-none backdrop-blur-sm">
-          <span class="relative z-10 flex items-center text-lg">
-            <svg class="w-5 h-5 mr-3 text-gray-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            Lihat Gallery
-            <svg class="w-5 h-5 ml-3 text-gray-500 group-hover:translate-x-1 group-hover:text-white transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        <!-- Premium Experience Header Badge -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-[#d8ff00] border-4 border-black text-black font-black uppercase tracking-widest mb-4 self-start shadow-[3px_3px_0px_#ff007f]">
+          <span class="w-2.5 h-2.5 bg-black rounded-full animate-pulse"></span>
+          <span class="text-xs font-black tracking-widest uppercase"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> HIDDENGEM PREMIUM PHOTO EXPERIENCE</span>
+        </div>
+        
+        <!-- Left-Aligned Premium Creative Typography -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 leading-[0.95] uppercase italic font-sans text-black">
+          CAPTURE YOUR<br />
+          <span class="relative inline-block mt-1 transform skew-x-1 font-black">
+            <span class="bg-[#fc4c02] text-black px-3 py-1 border-4 border-black shadow-[4px_4px_0px_#d8ff00] inline-block">MOMENTS</span>
           </span>
-        </NuxtLink>
+        </h1>
+        
+        <!-- Dynamic Creative Stats Dashboard Widget -->
+        <div class="grid grid-cols-3 gap-4 bg-white border-4 border-black p-4 mb-4 relative max-w-xl shadow-[6px_6px_0px_#00ff66]">
+          <div class="absolute top-2.5 right-2.5 text-[9px] font-mono font-black text-orange-600 uppercase tracking-widest bg-neutral-100 px-1.5 py-0.5 border border-black">STUDIO TELEMETRY</div>
+          
+          <div class="text-left">
+            <span class="text-[9px] text-gray-500 font-mono tracking-widest uppercase block font-black">COMPL. SESSIONS</span>
+            <span class="text-xl md:text-2xl font-mono font-black text-[#fc4c02] block mt-0.5">14,820 Runs</span>
+            <span class="text-[9px] text-green-600 font-black block mt-0.5">▲ Peak System Capacity</span>
+          </div>
+          <div class="text-left border-l-4 border-black pl-4">
+            <span class="text-[9px] text-gray-500 font-mono tracking-widest uppercase block font-black">CAMERA SYSTEM</span>
+            <span class="text-xl md:text-2xl font-mono font-black text-black block mt-0.5">DSLR + WEB</span>
+            <span class="text-[9px] text-gray-600 block mt-0.5">Dual Stream Support</span>
+          </div>
+          <div class="text-left border-l-4 border-black pl-4">
+            <span class="text-[9px] text-gray-500 font-mono tracking-widest uppercase block font-black">STUDIO SYSTEM</span>
+            <span class="text-xl md:text-2xl font-mono font-black text-[#00ff66] block mt-0.5">ACTIVE</span>
+            <span class="text-[9px] text-green-600 block mt-0.5">● Kiosk Mode Online</span>
+          </div>
+        </div>
+
+        <p class="text-sm md:text-base text-neutral-800 max-w-xl mb-4 font-black uppercase leading-relaxed italic">
+          Bukan sekadar foto biasa. Sesi foto HiddenGem memadukan photostrip cetak fisik premium, video behind-the-scenes sinematik, dan boomerang GIF estetik dalam satu langkah instan.
+        </p>
+
+        <!-- Premium Lifestyle Indicators -->
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 bg-[#fc4c02] border-2 border-black text-[10px] md:text-xs font-black uppercase tracking-widest text-black shadow-[2px_2px_0px_#000]"><i class="fa-solid fa-camera mr-1"></i> Premium Capture</span>
+          <span class="px-3 py-1.5 bg-[#d8ff00] border-2 border-black text-[10px] md:text-xs font-black uppercase tracking-widest text-black shadow-[2px_2px_0px_#ff007f]"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> AI Smart Shaders</span>
+          <span class="px-3 py-1.5 bg-[#00f0ff] border-2 border-black text-[10px] md:text-xs font-black uppercase tracking-widest text-black shadow-[2px_2px_0px_#00ff66]"><i class="fa-solid fa-mobile-screen-button mr-1"></i> QR Touchless</span>
+          <span class="px-3 py-1.5 bg-[#ff007f] border-2 border-black text-[10px] md:text-xs font-black uppercase tracking-widest text-black shadow-[2px_2px_0px_#d8ff00]"><i class="fa-solid fa-crown mr-1"></i> Luxury Photostrips</span>
+        </div>
       </div>
 
-      <!-- Stats / Features -->
-      <div class="mt-20 flex flex-wrap justify-center gap-12 animate-fade-in-up" style="animation-delay: 0.5s;">
-        <div class="text-center">
-          <div class="text-4xl font-black text-[#fc4c02] mb-1">4</div>
-          <div class="text-sm text-gray-500 uppercase tracking-wider">Pose Photos</div>
+      <!-- RIGHT COLUMN: Premium Action Arena Gate Card -->
+      <div class="col-span-5 relative w-full flex items-center justify-center min-h-0 animate-fade-in-up" style="animation-delay: 0.2s">
+        
+        <!-- 3D Creative Portal Card Stack -->
+        <div class="relative w-full max-w-[370px] z-10 bg-white border-4 border-black p-5 shadow-[10px_10px_0px_#00f0ff] flex flex-col justify-between">
+          
+          <div>
+            <!-- Studio details -->
+            <div class="flex items-center justify-between border-b-4 border-black pb-3 mb-4 text-left">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-[#fc4c02]">HIDDENGEM STUDIO</span>
+                <h3 class="text-xl font-black text-black uppercase italic mt-0.5 leading-none">CREATIVE PORTAL</h3>
+              </div>
+              <i class="fa-solid fa-bolt text-2xl text-black"></i>
+            </div>
+
+            <!-- Central timer dashboard -->
+            <div class="relative w-full aspect-video bg-neutral-50 border-4 border-black p-4 flex flex-col justify-center items-center overflow-hidden mb-4 shadow-[3px_3px_0px_#ff007f]">
+              <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(#000 1.5px, transparent 1.5px); background-size: 15px 15px;"></div>
+              
+              <span class="text-[9px] text-[#fc4c02] font-black tracking-widest uppercase">STUDIO SESSION TIMER</span>
+              <div class="text-4xl font-mono font-black text-black mt-1 flex items-baseline gap-1">
+                <span>05:00</span>
+                <span class="text-sm text-[#fc4c02]">.00s</span>
+              </div>
+              <span class="text-[9px] text-gray-500 mt-1 uppercase font-bold">CREATIVE ENGINE READY</span>
+            </div>
+
+            <!-- Feature summary specs list -->
+            <div class="space-y-2 text-left mb-4 text-xs text-black">
+              <div class="flex justify-between items-center bg-neutral-50 border-2 border-black px-4 py-2.5 shadow-[2px_2px_0px_#00f0ff]">
+                <span class="font-black text-black"><i class="fa-solid fa-image-portrait mr-1"></i> Studio Pose Slots</span>
+                <span class="text-[#00ff66] font-mono font-black text-sm filter invert">3 - 4 Poses</span>
+              </div>
+              <div class="flex justify-between items-center bg-neutral-50 border-2 border-black px-4 py-2.5 shadow-[2px_2px_0px_#ff007f]">
+                <span class="font-black text-black"><i class="fa-solid fa-sliders mr-1"></i> AI Smart Filters</span>
+                <span class="text-orange-600 font-mono font-black text-sm">Active</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solid studio action buttons stack -->
+          <div class="space-y-3">
+            <NuxtLink to="/session" class="w-full text-center inline-block py-3.5 bg-[#d8ff00] text-black font-black border-4 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[4px_4px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] transition-all uppercase tracking-widest text-xs">
+              ENTER STUDIO 🚀
+            </NuxtLink>
+            
+            <NuxtLink to="/gallery" class="w-full text-center inline-block py-2.5 bg-[#ff007f] text-black font-black border-4 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[4px_4px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] transition-all text-xs uppercase tracking-widest">
+              VIEW GALLERY 🏆
+            </NuxtLink>
+          </div>
         </div>
-        <div class="w-px h-12 bg-white/10 hidden sm:block"></div>
-        <div class="text-center">
-          <div class="text-4xl font-black text-[#fc4c02] mb-1">GIF</div>
-          <div class="text-sm text-gray-500 uppercase tracking-wider">Boomerang</div>
-        </div>
-        <div class="w-px h-12 bg-white/10 hidden sm:block"></div>
-        <div class="text-center">
-          <div class="text-4xl font-black text-[#fc4c02] mb-1">Video</div>
-          <div class="text-sm text-gray-500 uppercase tracking-wider">Behind Scenes</div>
-        </div>
+
       </div>
+
     </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 py-10 px-6 border-t border-white/5 bg-black/50">
+    <footer class="relative z-50 py-3 border-t-4 border-black bg-white">
       <div class="max-w-7xl mx-auto text-center">
-        <p class="text-gray-500 text-sm">
-          <span class="font-bold text-white">HiddenGem</span><span class="text-[#fc4c02]">Booth</span> © 2026 • Premium Photobooth Experience
+        <p class="text-gray-600 text-[10px] tracking-widest uppercase">
+          <span class="font-black text-black">HiddenGem</span>
+          <span class="font-black text-[#fc4c02]">Studio</span> 
+          <span class="text-gray-400 mx-2">•</span> 
+          <span>Luxury Photobooth Platform © 2026 ✦</span>
         </p>
       </div>
     </footer>
+
   </div>
 </template>
 
 <script setup>
+import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'nuxt/app'
+import { useHead } from '#imports'
+
+const router = useRouter()
+
+// Inject Font Awesome 6 CDN dynamically into the page head
+useHead({
+  link: [
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' }
+  ]
+})
+
+// UI Control reactive elements
+const showPasscodeModal = ref(false)
+const showAdminModal = ref(false)
+const passcodeInput = ref('')
+const passcodeError = ref(false)
+
+// Operator Settings persisted parameters
+const settings = reactive({
+  eventName: 'HiddenGemBooth',
+  activePrice: 25000,
+  dccPort: '5513',
+  ticketString: 'HGEM-TKT,TICKET01,TICKET02',
+  voucherString: 'HGEM100,VCHR20,DISC10',
+  enablePromo: false,
+  promoText: 'Dapatkan softfile berkualitas tinggi & cetakan estetik. Gunakan kode voucher di bawah untuk mendapatkan gratis 1 strip foto!',
+  enablePaymentQR: false,
+  paymentQRUrl: ''
+})
+
+onMounted(() => {
+  if (process.client) {
+    const savedEvent = localStorage.getItem('booth_event_name')
+    const savedPrice = localStorage.getItem('booth_active_price')
+    let savedPort = localStorage.getItem('dcc_port')
+    const savedTickets = localStorage.getItem('booth_tickets')
+    const savedVouchers = localStorage.getItem('booth_vouchers')
+    const savedEnablePromo = localStorage.getItem('booth_enable_promo')
+    const savedPromoText = localStorage.getItem('booth_promo_text')
+    const savedEnablePaymentQR = localStorage.getItem('booth_enable_payment_qr')
+    const savedPaymentQRUrl = localStorage.getItem('booth_payment_qr_url')
+
+    if (savedEvent) settings.eventName = savedEvent
+    if (savedPrice) settings.activePrice = Number(savedPrice)
+    if (savedPort === '8080' || savedPort === '5514') {
+      savedPort = '5513'
+      localStorage.setItem('dcc_port', '5513')
+    }
+    if (savedPort) settings.dccPort = savedPort
+    if (savedTickets) settings.ticketString = savedTickets
+    if (savedVouchers) settings.voucherString = savedVouchers
+    if (savedEnablePromo) settings.enablePromo = savedEnablePromo === 'true'
+    if (savedPromoText) settings.promoText = savedPromoText
+    if (savedEnablePaymentQR) settings.enablePaymentQR = savedEnablePaymentQR === 'true'
+    if (savedPaymentQRUrl) settings.paymentQRUrl = savedPaymentQRUrl
+  }
+})
+
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+function openPasscodeModal() {
+  passcodeInput.value = ''
+  passcodeError.value = false
+  showPasscodeModal.value = true
+}
+
+function submitPasscode() {
+  if (passcodeInput.value === '1234') {
+    showPasscodeModal.value = false
+    showAdminModal.value = true
+  } else {
+    passcodeError.value = true
+    passcodeInput.value = ''
+  }
+}
+
+function saveSettings() {
+  if (process.client) {
+    localStorage.setItem('booth_event_name', settings.eventName)
+    localStorage.setItem('booth_active_price', settings.activePrice.toString())
+    localStorage.setItem('dcc_port', settings.dccPort)
+    localStorage.setItem('booth_tickets', settings.ticketString)
+    localStorage.setItem('booth_vouchers', settings.voucherString)
+    localStorage.setItem('booth_enable_promo', settings.enablePromo.toString())
+    localStorage.setItem('booth_promo_text', settings.promoText)
+    localStorage.setItem('booth_enable_payment_qr', settings.enablePaymentQR.toString())
+    localStorage.setItem('booth_payment_qr_url', settings.paymentQRUrl)
+  }
+  showAdminModal.value = false
+  alert('HiddenGemBooth settings updated successfully!')
 }
 </script>
 
 <style>
-@keyframes pulse-slow {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
-}
-
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 8s ease-in-out infinite;
-}
-
-.animate-pulse-slow-delayed {
-  animation: pulse-slow 10s ease-in-out infinite;
-  animation-delay: -3s;
 }
 
 .animate-fade-in-up {
@@ -138,21 +388,19 @@ function scrollToTop() {
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
-
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #444;
+.animate-slide-in {
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 </style>
