@@ -819,8 +819,22 @@
                             :style="viewfinderStyle"
                         />
 
+                        <!-- Processing overlay when taking picture -->
+                        <div
+                            v-if="isCapturingPhoto"
+                            class="absolute inset-0 z-30 bg-black/85 flex flex-col items-center justify-center text-center animate-scale-up"
+                        >
+                            <div class="relative w-16 h-16 mb-4 flex items-center justify-center border-4 border-black bg-[#d8ff00] shadow-[3px_3px_0px_#fc4c02]">
+                                <div class="absolute inset-0 border-4 border-transparent border-t-[#fc4c02] animate-spin" style="animation-duration: 0.8s;"></div>
+                                <i class="fa-solid fa-camera text-xl text-black"></i>
+                            </div>
+                            <span class="text-sm font-black text-white uppercase tracking-widest italic animate-pulse">PROCESSING PHOTO...</span>
+                            <span class="text-[9px] text-gray-400 font-mono mt-1 uppercase tracking-wider">LENS SHUTTER OPEN • RETRIEVING FRAME</span>
+                        </div>
+
                         <!-- Massive dynamic countdown overlap -->
                         <div
+                            v-if="countdown >= 0 && !isCapturingPhoto"
                             class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
                         >
                             <span
@@ -1565,6 +1579,7 @@ const recordingCanvasEl = ref(null);
 const cameraReady = ref(false);
 const dslrLiveViewUrl = ref("");
 const liveViewError = ref(false);
+const isCapturingPhoto = ref(false);
 const dccPort = ref("5513");
 
 // Remote configurations
@@ -1885,10 +1900,13 @@ let liveViewInterval = null;
 const startLiveViewPolling = () => {
     stopLiveViewPolling();
     liveViewError.value = false;
-    // Trigger LiveViewWnd_Show to open the camera preview window if it's not already open
+    // Trigger LiveViewWnd_Show to start the live view on the camera
     fetch(`/api/dcc?port=${dccPort.value}&CMD=LiveViewWnd_Show`).catch(
         () => {},
     );
+    // Note: LiveViewWnd_Hide actually stops the live view stream entirely on the camera,
+    // so we should NOT call it here. The digiCamControl window can be minimized manually
+    // or set to "Start minimized" / "Minimize to tray" in digiCamControl settings.
 
     // Start polling the frame endpoint on the main port 5513
     liveViewInterval = setInterval(() => {
@@ -1919,10 +1937,6 @@ onBeforeUnmount(() => {
 
 // Camera Source Switching
 const changeCameraSource = async (source) => {
-    // Only DSLR mode is supported now
-    fetch(`/api/dcc?port=${dccPort.value}&CMD=LiveViewWnd_Show`).catch(
-        (e) => {},
-    );
     checkCanonConnection();
     startLiveViewPolling();
 };
@@ -1938,12 +1952,6 @@ const checkCanonConnection = async () => {
 
         const wasReady = cameraReady.value;
         cameraReady.value = true;
-
-        // Automatically trigger live view window show command so that the camera starts streaming
-        await fetch(
-            `/api/dcc?port=${dccPort.value}&CMD=LiveViewWnd_Show&t=${Date.now()}`,
-            { cache: "no-store" },
-        );
 
         if (!wasReady) {
             startLiveViewPolling();
@@ -2115,12 +2123,16 @@ const startCountdown = () => {
         countdown.value--;
         if (countdown.value === 0) {
             clearInterval(timerInterval);
-            snapPhoto();
+            // Delay 300ms showing "0" so the user has time to smile, then trigger snap
+            setTimeout(() => {
+                snapPhoto();
+            }, 300);
         }
     }, 1000);
 };
 
 const snapPhoto = async () => {
+    isCapturingPhoto.value = true;
     try {
         flash.value = true;
         setTimeout(() => {
@@ -2130,9 +2142,39 @@ const snapPhoto = async () => {
         // Stop polling during capture to avoid broken frames
         stopLiveViewPolling();
 
-        // Trigger capture command via proxy
+        // 1. Get the name of the last captured photo before taking a new one
+        let prevCaptured = "";
+        try {
+            const res = await fetch(`/api/dcc?port=${dccPort.value}&slc=get&param1=lastcaptured`);
+            prevCaptured = (await res.text()).trim();
+        } catch (e) {
+            console.warn("Failed to get last captured photo name", e);
+        }
+
+        // 2. Turn off live view window in digiCamControl to release the camera mirror for capture
+        await fetch(`/api/dcc?port=${dccPort.value}&CMD=LiveViewWnd_Hide`).catch(
+            () => {},
+        );
+        // Wait 100ms (very fast) for the camera command queue to register
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        // 3. Trigger capture command via proxy
         await fetch(`/api/dcc?port=${dccPort.value}&slc=capture`);
-        await new Promise((resolve) => setTimeout(resolve, 2500));
+
+        // 4. Poll lastcaptured until it changes to a new filename (and is not "-")
+        const maxPollAttempts = 30; // 30 * 200ms = 6 seconds max timeout
+        for (let attempt = 0; attempt < maxPollAttempts; attempt++) {
+            await new Promise((resolve) => setTimeout(resolve, 200));
+            try {
+                const res = await fetch(`/api/dcc?port=${dccPort.value}&slc=get&param1=lastcaptured`);
+                const current = (await res.text()).trim();
+                if (current && current !== "-" && current !== prevCaptured) {
+                    break;
+                }
+            } catch (e) {
+                console.warn("Polling lastcaptured error", e);
+            }
+        }
 
         // Fetch photo from proxy
         const photoUrl = `/api/dcc?port=${dccPort.value}&path=preview.jpg&t=${Date.now()}`;
@@ -2148,6 +2190,7 @@ const snapPhoto = async () => {
         console.error("Capture error", err);
         errorMessage.value = "Gagal mengambil foto.";
         state.value = "error";
+        isCapturingPhoto.value = false;
     }
 };
 
@@ -2207,6 +2250,7 @@ function applyFilterToPhotoData(srcData) {
         }
 
         state.value = "previewing";
+        isCapturingPhoto.value = false;
         startTimeout();
     };
 }

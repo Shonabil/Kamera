@@ -144,13 +144,13 @@ class CameraController extends Controller
             }
 
             // --- STEP 2: Place the template (which has transparent holes) ON TOP ---
+            $templateImg = null;
             $templatePath = $templateName && $templateName !== 'custom' ? public_path("images/{$templateName}") : null;
             if ($templatePath && file_exists($templatePath)) {
                 $templateImg = $manager->decodePath($templatePath);
                 if ($templateImg->width() !== $stripWidth || $templateImg->height() !== $stripHeight) {
                     $templateImg->scale(width: $stripWidth, height: $stripHeight);
                 }
-                $canvas->insert($templateImg, 0, 0, 'top-left');
             } elseif ($templateName === 'custom' && !empty($customFrame)) {
                 $templateImg = $manager->createImage($stripWidth, $stripHeight, function ($image) use ($customFrame) {
                     $bgColor = $customFrame['bgColor'] ?? '#ffffff';
@@ -161,13 +161,31 @@ class CameraController extends Controller
                     $drawingData = base64_decode($matches[1]);
                     $tmpPath = tempnam(sys_get_temp_dir(), 'custom_frame_');
                     file_put_contents($tmpPath, $drawingData);
-                    $drawingImg = $manager->make($tmpPath);
+                    $drawingImg = $manager->read($tmpPath);
                     if ($drawingImg->width() !== $stripWidth || $drawingImg->height() !== $stripHeight) {
-                        $drawingImg->resize($stripWidth, $stripHeight);
+                        $drawingImg->scale(width: $stripWidth, height: $stripHeight);
                     }
                     $templateImg->insert($drawingImg, 0, 0, 'top-left');
                     @unlink($tmpPath);
                 }
+            }
+
+            if ($templateImg) {
+                // Punch transparent holes in the template image where the slots are
+                $gdImage = $templateImg->core()->native();
+                imagealphablending($gdImage, false);
+                $transparentColor = imagecolorallocatealpha($gdImage, 0, 0, 0, 127);
+                foreach ($config['slots'] as $slot) {
+                    imagefilledrectangle(
+                        $gdImage,
+                        $slot['x'],
+                        $slot['y'],
+                        $slot['x'] + $slot['w'] - 1,
+                        $slot['y'] + $slot['h'] - 1,
+                        $transparentColor
+                    );
+                }
+                imagealphablending($gdImage, true);
 
                 $canvas->insert($templateImg, 0, 0, 'top-left');
             }
